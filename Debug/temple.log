@@ -1,0 +1,39 @@
+﻿2018/10/27 17:00:07 にビルドを開始しました。
+     1>ノード 2 上のプロジェクト "D:\myProject\vs2015\HEW\20181019_HEW\temple.vcxproj" (Build ターゲット)。
+     1>ClCompile:
+         D:\tool\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W4 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt camera.cpp
+         camera.cpp
+     1>d:\myproject\vs2015\hew\20181019_hew\camera.cpp(67): warning C4244: '=': 'FLOAT' から 'LONG' への変換です。データが失われる可能性があります。
+     1>d:\myproject\vs2015\hew\20181019_hew\camera.cpp(68): warning C4244: '=': 'FLOAT' から 'LONG' への変換です。データが失われる可能性があります。
+     1>d:\myproject\vs2015\hew\20181019_hew\camera.cpp(69): warning C4244: '=': 'FLOAT' から 'LONG' への変換です。データが失われる可能性があります。
+     1>d:\myproject\vs2015\hew\20181019_hew\camera.cpp(70): warning C4244: '=': 'FLOAT' から 'LONG' への変換です。データが失われる可能性があります。
+       Link:
+         D:\tool\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\myProject\vs2015\HEW\20181019_HEW\Debug\temple.exe" /INCREMENTAL /NOLOGO d3d9.lib d3dx9d.lib dinput8.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"D:\myProject\vs2015\HEW\20181019_HEW\Debug\temple.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\myProject\vs2015\HEW\20181019_HEW\Debug\temple.lib" /MACHINE:X86 Debug\Animation.obj
+         Debug\background.obj
+         Debug\BackgroundManager.obj
+         Debug\camera.obj
+         Debug\cameraManager.obj
+         Debug\CObject.obj
+         Debug\CObjectMng.obj
+         Debug\Collision.obj
+         Debug\COwl.obj
+         Debug\CPlayer.obj
+         Debug\DirectX3D.obj
+         Debug\GameStage.obj
+         Debug\Input.obj
+         Debug\Main.obj
+         Debug\PlayerManager.obj
+         Debug\Sprite.obj
+         Debug\sprite3D.obj
+         Debug\SystemTimer.obj
+         Debug\Texture.obj
+         Debug\Title.obj
+         Debug\TutorialMap.obj
+         Debug\UI_Manager.obj
+         Debug\UI_PlayerLife.obj
+         temple.vcxproj -> D:\myProject\vs2015\HEW\20181019_HEW\Debug\temple.exe
+     1>プロジェクト "D:\myProject\vs2015\HEW\20181019_HEW\temple.vcxproj" (Build ターゲット) のビルドが完了しました。
+
+ビルドに成功しました。
+
+経過時間 00:00:01.63
