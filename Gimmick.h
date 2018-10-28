@@ -1,8 +1,8 @@
 //=============================================================================
 //
-// カメラクラス [camera.h]
+// ギミッククラス [Gimmick.h]
 //										Autor:ロ
-//										Date:2018/09/30
+//										Date:2018/10/26
 //=============================================================================
 
 #ifndef GIMMICK_H
@@ -11,30 +11,19 @@
 //*****************************************************************************
 // インクルードファイル
 //*****************************************************************************
-#include <d3dx9.h>
-
+#include "CPillar.h"
 
 //*****************************************************************************
-// カメラクラス
+// ギミッククラス
 //*****************************************************************************
-class Camera {
+class Gimmick : public CPillar {
 private:
-	D3DXMATRIX orthographicMatrix;
-	D3DXMATRIX identityMatrix;
-	D3DXMATRIX viewMatrix;
-
-	D3DXVECTOR2 pos;
-	RECT view_range;
-
-	//player ui width
-	int UI_Width;
+	
 public:
-	Camera();
-	~Camera();
+	Gimmick(k_Texture index, Float2 Pos, Float2 hl);
+	~Gimmick();
 
-	void Update(D3DXVECTOR2 player1_vec, D3DXVECTOR2 player2_vec);
-	void SetTransform();
-	RECT GetViewRange();
+	RectC2D GetPosition(void);
 };
 
 #endif

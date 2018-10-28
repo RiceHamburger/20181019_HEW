@@ -22,6 +22,7 @@ static const textureData textureFiles[] =
 	{ "asset/texture/sozai1.jpg",				3200,	900},		// ƒ^ƒCƒgƒ‹
 	{ "asset/texture/heart.png",				32,		32 },		// ¶–½—Í
 	{ "asset/texture/playerLifeBG.jpg",			70,		900 },		// ¶–½—Í‚Ì”wŒi
+	{ "asset/texture/ladder.jpg",				77,		431 },		// ‚Í‚µ‚²
 }; 
 
 /* --------------------------------

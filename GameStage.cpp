@@ -13,9 +13,11 @@
 #include "TutorialMap.h"
 #include "BackgroundManager.h"
 #include "UI_Manager.h"
+#include "Gimmick_Manager.h"
 
 #include "CObjectMng.h"
 #include "CPillar.h"
+#include "Gimmick.h"
 
 //=====================================================================//
 //                                                                     //
@@ -64,10 +66,10 @@ void GameInit(void)
 	CameraManager_Initialize();
 	//UI
 	UI_Init();
+	Gimmick_ManagerInit();
 
 	//柱の生成
 	pPillar = new CPillar(k_kobeni, Float2(810.0f, 577.5f), Float2(55.0f, 107.5f));
-
 }
 //=====================================================================//
 //                                                                     //
@@ -82,6 +84,7 @@ void GameUnit(void)
 	PlayerUnit();
 	UI_Unit();
 	CameraManager_Finalize();
+	Gimmick_ManagerUnit();
 }
 
 //=====================================================================//
@@ -105,6 +108,7 @@ void GameUpdate(void)
 		//TutorialUpdate();
 		//PlayerUpdate();
 		CameraManager_Update(GetPlayerPos(PLAYER_ONE), GetPlayerPos(PLAYER_TWO));
+		Gimmick_ManagerUpdate();
 
 		//オブジェクトの更新
 		m_pObjectMng->Update();
@@ -168,6 +172,8 @@ void GameDraw(void)
 
 		//UI描画
 		UI_Draw();
+
+		Gimmick_ManagerDraw();
 
 		//PlayerDraw();
 		

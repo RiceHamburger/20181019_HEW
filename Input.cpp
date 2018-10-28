@@ -14,7 +14,7 @@
 #include "GameStage.h"
 #include "CPlayer.h"
 #include "PlayerManager.h"
-
+#include "Gimmick_Manager.h"
 
 //=====================================================================//
 //                                                                     //
@@ -240,7 +240,9 @@ void KeyboardUpdate(void)
 	-------------------------------- */
 	if (KeyboardIsPress(DIK_UP) || KeyboardIsPress(DIK_W))
 	{
+		if (Ladder_CollisionCheck(GetPlayerPos(PLAYER_ONE))) {
 
+		}
 	}
 	/* --------------------------------
 	‰ºˆÚ“®	Player1
