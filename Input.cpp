@@ -276,6 +276,24 @@ void KeyboardUpdate(void)
 		SetPlayerMove(PLAYER_TWO , true);
 	}
 	/* --------------------------------
+	è„à⁄ìÆ	Player2
+	-------------------------------- */
+	if (KeyboardIsPress(DIK_I))
+	{
+		if (GetPlayerClimb(PLAYER_TWO)) {
+			SetPlayerMoveY(PLAYER_TWO, true);
+		}
+	}
+	/* --------------------------------
+	â∫à⁄ìÆ	Player2
+	-------------------------------- */
+	if (KeyboardIsPress(DIK_K))
+	{
+		if (GetPlayerClimb(PLAYER_TWO)) {
+			SetPlayerMoveY(PLAYER_TWO, false);
+		}
+	}
+	/* --------------------------------
 	ÉWÉÉÉìÉv	Player2
 	-------------------------------- */
 	if (KeyboardIsPress(DIK_M))

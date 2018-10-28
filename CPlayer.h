@@ -59,6 +59,7 @@ private:
 	static float axis_max;
 	static float axis_min;
 
+	//¡‚Ì°‚ÌÀ•W
 	int m_Ground;
 
 public:

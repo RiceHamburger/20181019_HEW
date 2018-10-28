@@ -165,13 +165,13 @@ bool CPlayer::Update(void) {
 		pos.p.x = min(pos.p.x, axis_max - pos.hl.x);
 
 		//YŽ²
-		pos.p.y = max(GROUND_Y1 + pos.hl.y, pos.p.y);
+		pos.p.y = max(m_Ground + pos.hl.y, pos.p.y);
 		pos.p.y = min(pos.p.y, SCREEN_HEIGHT - pos.hl.y);
 		
 		
 
 		//’…’n”»’è
-		if (pos.p.y <= GROUND_Y1 + pos.hl.y && !m_Climb) {
+		if (pos.p.y <= m_Ground + pos.hl.y && !m_Climb) {
 			m_bJump = false;
 			m_velocity.y = 0.0f;
 		}
@@ -208,11 +208,11 @@ bool CPlayer::Update(void) {
 		pos.p.x = min(pos.p.x, axis_max - pos.hl.x);
 
 		//YŽ²
-		pos.p.y = max(GROUND_Y2 + pos.hl.y, pos.p.y);
+		pos.p.y = max(m_Ground + pos.hl.y, pos.p.y);
 		pos.p.y = min(pos.p.y, SCREEN_HEIGHT - pos.hl.y);
 
 		//’…’n”»’è
-		if (pos.p.y <= GROUND_Y2 + pos.hl.y) {
+		if (pos.p.y <= m_Ground + pos.hl.y) {
 			m_bJump = false;
 			m_velocity.y = 0.0f;
 		}
@@ -238,6 +238,13 @@ bool CPlayer::Update(void) {
 	else {
 		//m_velocity.y = NULL;
 		m_vecDir.y = GRAVITY;
+	}
+
+	if (pos.p.y < GROUND_Y2 || m_Climb) {
+		m_Ground = GROUND_Y1;
+	}
+	else {
+		m_Ground = GROUND_Y2;
 	}
 
 	return true;

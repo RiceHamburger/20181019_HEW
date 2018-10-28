@@ -13,7 +13,7 @@
 #include "PlayerManager.h"
 #include "Gimmick.h"
 
-#define LADDER_HEIGHT_PLUS	(100.0f)
+#define LADDER_HEIGHT_PLUS	(80.0f)
 
 //*****************************************************************************
 // ƒOƒ[ƒoƒ‹•Ï”
