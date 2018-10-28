@@ -113,7 +113,7 @@ CPlayer::CPlayer(int num) {
 
 	//初期化
 	//Sprite::SetPos(D3DXVECTOR2(pos.p.x, pos.p.y), 64, 64);	// （D3DXVECTOR2(XY座標),長さ,高さ）を設定
-	//Sprite::SetDivide(1, 1);							    // 画像分割数
+	//Sprite::SetDivide(1, 1);									// 画像分割数
 	//Sprite::SetUVNum(0, 0);									// 現在UV座標設定
 
 	//*****************************************************************弄ったところ*****************************************************************************************
@@ -166,12 +166,12 @@ bool CPlayer::Update(void) {
 
 		//Y軸
 		pos.p.y = max(GROUND_Y1 + pos.hl.y, pos.p.y);
-		pos.p.y = min(pos.p.y, SCREEN_HEIGHT/2 - pos.hl.y);
+		pos.p.y = min(pos.p.y, SCREEN_HEIGHT - pos.hl.y);
 		
 		
 
 		//着地判定
-		if (pos.p.y <= GROUND_Y1 + pos.hl.y) {
+		if (pos.p.y <= GROUND_Y1 + pos.hl.y && !m_Climb) {
 			m_bJump = false;
 			m_velocity.y = 0.0f;
 		}
@@ -228,6 +228,17 @@ bool CPlayer::Update(void) {
 
 	//移動ベクトルの初期化
 	m_vecDir.x = NULL;
+	
+
+	//階段判定
+	if (m_Climb) {
+		m_velocity.y = m_velocity.y * VELOCITY_RESIST;
+		m_vecDir.y = NULL;
+	}
+	else {
+		//m_velocity.y = NULL;
+		m_vecDir.y = GRAVITY;
+	}
 
 	return true;
 }
@@ -247,7 +258,7 @@ void CPlayer::Draw(void) {
 	////描画
 	//LPDIRECT3DDEVICE9 pDevice = DirectX3DGetDevice();
 	//Sprite3D::Draw(pDevice, DirectX3DGetTEXTURE(k_kobeni));
-	Sprite3D::Draw(k_kobeni , pos , 0.0f);
+	Sprite3D::Draw(k_kobeni , pos , -1.0f);
 	//*****************************************************************弄ったところ*****************************************************************************************
 }
 
@@ -259,6 +270,17 @@ void CPlayer::SetVelocityX(bool direction) {
 	}
 	else {
 		m_vecDir.x -= VECDIR_X;
+	}
+}
+
+//縦移動 : (false 下 : true 上)
+void CPlayer::SetVelocityY(bool direction) {
+
+	if (direction) {
+		m_vecDir.y += VECDIR_X;
+	}
+	else {
+		m_vecDir.y -= VECDIR_X;
 	}
 }
 
@@ -284,4 +306,18 @@ void CPlayer::Jump(void) {
 void CPlayer::SetMoveRange(RECT view_range) {
 	axis_max = view_range.right;
 	axis_min = view_range.left;
+}
+
+//*****************************************************************************
+// 階段を登る設定
+//*****************************************************************************
+void CPlayer::SetClimb(bool climbing) {
+	m_Climb = climbing;
+}
+
+//*****************************************************************************
+// 登るのFLAGを取る
+//*****************************************************************************
+bool CPlayer::GetClimb() {
+	return m_Climb;
 }

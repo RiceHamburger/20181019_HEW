@@ -50,11 +50,16 @@ private:
 	//ジャンプ判定
 	bool m_bJump;
 
+	//階段判定
+	bool m_Climb;
+
 	//プレイヤー数
 	int m_numPlayer;
 
 	static float axis_max;
 	static float axis_min;
+
+	int m_Ground;
 
 public:
 	
@@ -73,7 +78,7 @@ public:
 
 	//横移動 : (false 左 : true 右)
 	void SetVelocityX(bool direction = true);
-
+	void SetVelocityY(bool direction = true);
 	//ジャンプ
 	void Jump(void);
 
@@ -85,6 +90,15 @@ public:
 	//*****************************************************************************
 	void SetMoveRange(RECT view_range);
 
+	//*****************************************************************************
+	// 階段を登る設定
+	//*****************************************************************************
+	void SetClimb(bool climbing);
+
+	//*****************************************************************************
+	// 登るのFLAGを取る
+	//*****************************************************************************
+	bool GetClimb();
 };
 
 #endif //_H

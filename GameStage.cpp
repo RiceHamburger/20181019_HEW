@@ -60,13 +60,13 @@ void GameInit(void)
 	CObjectRegister::SetObjectMng(m_pObjectMng);
 
 	PlayerInit();
+	Gimmick_ManagerInit();
 	TitleInit();
 	//TutorialInit();
 	BackgroundInit();
 	CameraManager_Initialize();
 	//UI
 	UI_Init();
-	Gimmick_ManagerInit();
 
 	//柱の生成
 	pPillar = new CPillar(k_kobeni, Float2(810.0f, 577.5f), Float2(55.0f, 107.5f));
@@ -166,14 +166,13 @@ void GameDraw(void)
 		CameraManager_Draw();
 		//TutorialDraw();
 		BackgroundDraw();
+		Gimmick_ManagerDraw();
 
 		//オブジェクトの描画
 		m_pObjectMng->Draw();
 
 		//UI描画
 		UI_Draw();
-
-		Gimmick_ManagerDraw();
 
 		//PlayerDraw();
 		

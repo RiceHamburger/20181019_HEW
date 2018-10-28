@@ -57,6 +57,22 @@ void SetPlayerMove(int index , bool bIs)
 	}
 }
 /* --------------------------------
+セットプレイヤーの移動(上下)
+-------------------------------- */
+void SetPlayerMoveY(int index, bool bIs)
+{
+	switch (index) {
+	case PLAYER_ONE:
+		g_pPlayer1->SetVelocityY(bIs);
+		break;
+
+	case PLAYER_TWO:
+		g_pPlayer2->SetVelocityY(bIs);
+		break;
+
+	}
+}
+/* --------------------------------
 セットプレイヤーのジャンプ
 -------------------------------- */
 void SetPlayerJump(int index)
@@ -95,4 +111,36 @@ D3DXVECTOR2 GetPlayerPos(int index)
 //*****************************************************************************
 void SetRange(RECT view_range) {
 	g_pPlayer1->SetMoveRange(view_range);
+}
+
+//*****************************************************************************
+// 階段を登るの設定
+//*****************************************************************************
+void SetPlayerClimb(int index, bool bIs) {
+	switch (index) {
+	case PLAYER_ONE:
+		return g_pPlayer1->SetClimb(bIs);
+		break;
+
+	case PLAYER_TWO:
+		return g_pPlayer2->SetClimb(bIs);
+		break;
+
+	}
+}
+
+//*****************************************************************************
+// 登るのFLAG
+//*****************************************************************************
+bool GetPlayerClimb(int index) {
+	switch (index) {
+	case PLAYER_ONE:
+		return g_pPlayer1->GetClimb();
+		break;
+
+	case PLAYER_TWO:
+		return g_pPlayer2->GetClimb();
+		break;
+
+	}
 }

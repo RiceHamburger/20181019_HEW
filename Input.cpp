@@ -240,8 +240,8 @@ void KeyboardUpdate(void)
 	-------------------------------- */
 	if (KeyboardIsPress(DIK_UP) || KeyboardIsPress(DIK_W))
 	{
-		if (Ladder_CollisionCheck(GetPlayerPos(PLAYER_ONE))) {
-
+		if (GetPlayerClimb(PLAYER_ONE)) {
+			SetPlayerMoveY(PLAYER_ONE, true);
 		}
 	}
 	/* --------------------------------
@@ -249,7 +249,9 @@ void KeyboardUpdate(void)
 	-------------------------------- */
 	if (KeyboardIsPress(DIK_DOWN) || KeyboardIsPress(DIK_S))
 	{
-
+		if (GetPlayerClimb(PLAYER_ONE)) {
+			SetPlayerMoveY(PLAYER_ONE, false);
+		}
 	}
 	/* --------------------------------
 	スペースキー	Player1
