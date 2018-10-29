@@ -42,10 +42,16 @@ CSearchLight::CSearchLight(Float2 p1, Float2 p2, Float2 p3, D3DCOLOR color) {
 	//カラーの設定
 	m_color = color;
 
+	Sprite3D::SetDivide(1, 1);							    // 画像分割数
+	Sprite3D::SetUVNum(0, 0);									// 現在UV座標設定
+
+
 }
 
 //描画
 void CSearchLight::Draw(void) {
+
+	Sprite3D::Draw(k_kobeni, m_pos, -0.1f , m_color);
 
 }
 
@@ -66,13 +72,16 @@ COwl::COwl(Float2 p, Float2 size, k_Texture index) {
 	//テクスチャの設定
 	m_textureIndex = index;
 
+	//サーチライトのポインター初期化
+	m_pLight = NULL;
+
 }
 
 //サーチライトの生成
 void COwl::CreateSearchLight(Float2 p1, Float2 p2, Float2 p3 , D3DCOLOR color) {
 
 	//サーチライトがすでに生成されていなければ生成
-	if (m_pLight) {
+	if (!m_pLight) {
 		m_pLight = new CSearchLight(p1, p2, p3, color);
 	}
 
@@ -112,13 +121,46 @@ CActiveOwl::CActiveOwl(Float2 pos, Float2 size, k_Texture index, int lightInterv
 	//ライトインターバルの設定
 	m_lightInterval = lightInterval;
 
+	//フレームカウントの初期化
+	m_frameCount = NULL;
+
+	Sprite3D::SetDivide(1, 1);							    // 画像分割数
+	Sprite3D::SetUVNum(0, 0);									// 現在UV座標設定
+
+
 }
 
 //アップデート
 bool CActiveOwl::Update() {
 
+	if (m_frameCount == m_lightInterval) {
+
+		if (m_pLight) {
+			delete m_pLight;
+			m_pLight = NULL;
+			m_frameCount = NULL;
+		}
+		else {
+			CreateSearchLight(Float2(700.0f , 715.0f), Float2(500.0f , 470.0f), Float2(250.0f , 470.0f), D3DCOLOR_RGBA(255, 255, 255, 255));
+			m_frameCount = NULL;
+		}
+	}
+
+
+	m_frameCount++;
 
 	return m_bAlive;
+}
+
+void CActiveOwl::Draw() {
+	//フクロウの描画
+	Sprite3D::Draw(m_textureIndex, pos, 0.0f);
+
+	//サーチライトが存在するなら描画
+	if (m_pLight) {
+		m_pLight->Draw();
+	}
+
 }
 
 

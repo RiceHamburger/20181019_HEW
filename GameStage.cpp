@@ -18,6 +18,10 @@
 #include "CObjectMng.h"
 #include "CPillar.h"
 #include "Gimmick.h"
+#include "CActivePillar.h"
+#include "COwl.h"
+#include "BlockTwoLoop.h"
+#include "CDoor.h"
 
 //=====================================================================//
 //                                                                     //
@@ -36,6 +40,10 @@ static int keyCnt = CNT_ZERO;
 
 static CObjectMng *m_pObjectMng;
 static CPillar *pPillar;
+static CActivePillar *pActivePillar;
+static CActiveOwl *pActiveOwl;
+static CDoor *pDoor;
+
 //=====================================================================//
 //                                                                     //
 //							プロトタイプ宣言						   //
@@ -62,6 +70,8 @@ void GameInit(void)
 	PlayerInit();
 	Gimmick_ManagerInit();
 	TitleInit();
+
+	BlockTwoLoopInit();
 	//TutorialInit();
 	BackgroundInit();
 	CameraManager_Initialize();
@@ -70,6 +80,10 @@ void GameInit(void)
 
 	//柱の生成
 	pPillar = new CPillar(k_kobeni, Float2(810.0f, 577.5f), Float2(55.0f, 107.5f));
+	pActivePillar = new CActivePillar(RectC2D(Float2(700.0f, 235.0f), Float2(50.0f, 215.0f)));
+	pActiveOwl = new CActiveOwl(Float2(700.0f, 715.0f), Float2(35.0f, 35.0f), k_kobeni, 60);
+
+	pDoor = new CDoor(k_kobeni, D3DXVECTOR2(3050, 500), D3DXVECTOR2(3050, 0));
 }
 //=====================================================================//
 //                                                                     //
@@ -85,6 +99,7 @@ void GameUnit(void)
 	UI_Unit();
 	CameraManager_Finalize();
 	Gimmick_ManagerUnit();
+	BlockTwoLoopUnit();
 }
 
 //=====================================================================//
@@ -109,6 +124,7 @@ void GameUpdate(void)
 		//PlayerUpdate();
 		CameraManager_Update(GetPlayerPos(PLAYER_ONE), GetPlayerPos(PLAYER_TWO));
 		Gimmick_ManagerUpdate();
+		BlockTwoLoopUpdate();
 
 		//オブジェクトの更新
 		m_pObjectMng->Update();
@@ -167,6 +183,10 @@ void GameDraw(void)
 		//TutorialDraw();
 		BackgroundDraw();
 		Gimmick_ManagerDraw();
+
+		BlockTwoLoopDraw();
+
+		pDoor->Draw();
 
 		//オブジェクトの描画
 		m_pObjectMng->Draw();

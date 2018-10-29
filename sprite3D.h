@@ -72,7 +72,14 @@ public:
 	void Draw(k_Texture index, RectC2D pos, float depth);
 
 	//描画 : 三角形
-	//void Draw(k_Texture index, Triangle2D pos, float depth, D3DCOLOR color);
+	void Draw(k_Texture index, Triangle2D pos, float depth, D3DCOLOR color);
+
+	//描画
+	void DrawRotate(IDirect3DDevice9* pDevice3D, IDirect3DTexture9* pTexture, FLOAT rotate);
+
+	//テクスチャONLY
+	void Draw(k_Texture pTexture);
+	void SetColor(D3DCOLOR color);
 };
 
 #endif

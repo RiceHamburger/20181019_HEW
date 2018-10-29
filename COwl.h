@@ -31,7 +31,7 @@
 /*-------------------------------------------
 	サーチライトクラス
 -------------------------------------------*/
-class CSearchLight
+class CSearchLight : public Sprite3D
 {
 private:
 
@@ -58,7 +58,7 @@ public:
 class COwl : public CObject 
 {
 
-private:
+protected:
 
 	//
 	//	メンバ変数
@@ -107,6 +107,9 @@ public:
 
 	//アップデート
 	virtual bool Update();
+
+	//描画
+	virtual void Draw();
 
 
 };
