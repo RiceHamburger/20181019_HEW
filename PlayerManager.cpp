@@ -79,7 +79,8 @@ void SetPlayerJump(int index)
 {
 	switch (index) {
 	case PLAYER_ONE:
-		g_pPlayer1->Jump();
+		//11/1@‚µ‚á‚ª‚Ý‚É•ÏX
+		g_pPlayer1->Squats();
 		break;
 
 	case PLAYER_TWO:

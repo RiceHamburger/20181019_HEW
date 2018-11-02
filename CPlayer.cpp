@@ -35,6 +35,7 @@
 #define GRAVITY						(-0.98f)
 #define JUMP_VALUE					(18.0f)
 #define X_AXIS_MAX					(3840.0f)
+#define SQUATA_HEIGHT				(40.0f)
 //*****************************************************************弄ったところ*****************************************************************************************
 
 //プレイヤー1
@@ -110,7 +111,6 @@ CPlayer::CPlayer(int num) {
 	//重力の設定
 	m_vecDir.y = GRAVITY;
 
-
 	//初期化
 	//Sprite::SetPos(D3DXVECTOR2(pos.p.x, pos.p.y), 64, 64);	// （D3DXVECTOR2(XY座標),長さ,高さ）を設定
 	//Sprite::SetDivide(1, 1);									// 画像分割数
@@ -171,12 +171,19 @@ bool CPlayer::Update(void) {
 		
 
 		//着地判定
-		if (pos.p.y <= m_Ground + pos.hl.y && !m_Climb) {
+		/*if (pos.p.y <= m_Ground + pos.hl.y && !m_Climb) {
 			m_bJump = false;
 			m_velocity.y = 0.0f;
 		}
 		else {
 			m_bJump = true;
+		}*/
+
+		if (m_Squats) {
+			pos.hl.y = SQUATA_HEIGHT;
+		}
+		else {
+			pos.hl.y = PLAYER_HEIGHT;
 		}
 
 		//*****************************************************************弄ったところ*****************************************************************************************
@@ -229,6 +236,8 @@ bool CPlayer::Update(void) {
 	//移動ベクトルの初期化
 	m_vecDir.x = NULL;
 	
+	//しゃがみの初期化
+	m_Squats = false;
 
 	//階段判定
 	if (m_Climb) {
@@ -236,7 +245,6 @@ bool CPlayer::Update(void) {
 		m_vecDir.y = NULL;
 	}
 	else {
-		//m_velocity.y = NULL;
 		m_vecDir.y = GRAVITY;
 	}
 
@@ -325,6 +333,15 @@ void CPlayer::SetClimb(bool climbing) {
 //*****************************************************************************
 // 登るのFLAGを取る
 //*****************************************************************************
-bool CPlayer::GetClimb() {
+bool CPlayer::GetClimb(void) {
 	return m_Climb;
+}
+
+//*****************************************************************************
+// しゃがみ
+//*****************************************************************************
+void CPlayer::Squats(void) {
+	if (!m_Squats) {
+		m_Squats = true;
+	}
 }
