@@ -1,8 +1,8 @@
 /*====================================================================================
 
-門クラス　 [CDoor.h]
+門クラス　 [DoorManager.h]
 Autor	: ユ・ビョンチャン
-Date	: 2018/10/26
+Date	: 2018/11/2
 --------------------------------------------------------------------------------------
 コメント:
 門クラス : 背景
@@ -12,16 +12,13 @@ Date	: 2018/10/26
 ====================================================================================*/
 
 
-#ifndef CDOOR_H
-#define CDOOR_H
+#ifndef DOORMANAGER_H
+#define DOORMANAGER_H
 /*--------------------------------------------------------------------------------------
 インクルードファイル
 --------------------------------------------------------------------------------------*/
-#include <Windows.h>
-#include <time.h>
 
 #include "CObject.h"
-#include "sprite3D.h"
 /*--------------------------------------------------------------------------------------
 列挙型 : 構造体
 --------------------------------------------------------------------------------------*/
@@ -31,35 +28,17 @@ Date	: 2018/10/26
 --------------------------------------------------------------------------------------*/
 
 /*--------------------------------------------------------------------------------------
-クラス宣言
+関数
 --------------------------------------------------------------------------------------*/
 
-class CDoor : public Sprite3D
-{
-public:
+void Door_Init(k_Texture index, D3DXVECTOR2 player_one, D3DXVECTOR2 player_two);
+void Door_Init(k_Texture index);
+void Door_Uninit(void);
+void Door_Update(void);
+void Door_Draw(void);
 
-	CDoor(k_Texture index, D3DXVECTOR2 pos0, D3DXVECTOR2 pos1);		//テクスチャ、上ドアー位置、下ドアー位置
-	CDoor(k_Texture index);
-	~CDoor();
-
-	void Switch(int index);											//ドアーが押されたか判断(中で当り判定やってる)
-
-	void ColorUpdate(void);											//ドアーが押された時の時間で色変えの時間を決めてる
-
-	void Draw();
-
-	bool Fin(void);													//両方押されたらtrueになる
-
-private:
-	k_Texture m_TextureIndex;										//テクスチャ
-	D3DXVECTOR2 m_pos[2];											//ドアー位置
-	D3DCOLOR m_color[2];											//色変えの時の色
-	bool m_OnOff[2];												//ドアーが押されたか
-	bool m_OK;														//両方押されたか
-
-	clock_t start[2], end[2];										//時間で色変えの長さ測定
-
-};
+void Door_Switch(int index);
+bool Door_Fin(void);
 
 
-#endif //CDOOR_H
+#endif //DOORMANAGER_H

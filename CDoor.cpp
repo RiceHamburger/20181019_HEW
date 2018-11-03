@@ -25,7 +25,7 @@ Date	: 2018/10/26
 マクロ定義
 --------------------------------------------------------------------------------------*/
 #define DOORCOUNT (2)											//ドアー数
-#define DOORCOLORTIME (10)										//時間測定基準
+#define DOORCOLORTIME (5)										//時間測定基準
 #define DOORCOLOR (D3DCOLOR_RGBA(255, 100, 200, 255))			//変える色
 #define DOORCOLOR_WHITE (D3DCOLOR_RGBA(255, 255, 255, 255))		//白色
 #define DOOR_WIDTH (100)
@@ -40,14 +40,33 @@ CDoor::CDoor(k_Texture index, D3DXVECTOR2 pos0, D3DXVECTOR2 pos1)
 {
 	m_TextureIndex = index;
 
-	m_pos[0] = pos0;
-	m_pos[1] = pos1;
+	m_pos[PLAYER_ONE] = pos0;
+	m_pos[PLAYER_TWO] = pos1;
 	
-	m_color[0] = DOORCOLOR;
-	m_color[1] = DOORCOLOR;
+	m_color[PLAYER_ONE] = DOORCOLOR;
+	m_color[PLAYER_TWO] = DOORCOLOR;
 
-	m_OnOff[0] = false;
-	m_OnOff[1] = false;
+	m_OnOff[PLAYER_ONE] = false;
+	m_OnOff[PLAYER_TWO] = false;
+	m_OK = false;
+
+	Sprite3D::SetColor(DOORCOLOR_WHITE);
+	Sprite3D::SetDivide(1, 1);
+	Sprite3D::SetUVNum(0, 0);
+}
+
+CDoor::CDoor(k_Texture index)
+{
+	m_TextureIndex = index;
+	
+	m_pos[PLAYER_ONE] = D3DXVECTOR2(3050.0f, 100.0f);
+	m_pos[PLAYER_TWO] = D3DXVECTOR2(3050.0f, 550.0f);
+
+	m_color[PLAYER_ONE] = DOORCOLOR;
+	m_color[PLAYER_TWO] = DOORCOLOR;
+
+	m_OnOff[PLAYER_ONE] = false;
+	m_OnOff[PLAYER_TWO] = false;
 	m_OK = false;
 
 	Sprite3D::SetColor(DOORCOLOR_WHITE);
@@ -67,7 +86,8 @@ void CDoor::Switch(int index)
 	{
 	case PLAYER_ONE:
 		//当り判定
-		if (GetPlayerPos(PLAYER_ONE).y <= m_pos[PLAYER_ONE].y + DOOR_HEIGHT) {
+		if (GetPlayerPos(PLAYER_ONE).y <= m_pos[PLAYER_ONE].y + DOOR_HEIGHT &&
+			GetPlayerPos(PLAYER_ONE).y >= m_pos[PLAYER_ONE].y - DOOR_HEIGHT) {
 			if (GetPlayerPos(PLAYER_ONE).x <= m_pos[PLAYER_ONE].x + DOOR_WIDTH &&
 				GetPlayerPos(PLAYER_ONE).x >= m_pos[PLAYER_ONE].x - DOOR_WIDTH) {
 				//Onになった処理
@@ -88,7 +108,8 @@ void CDoor::Switch(int index)
 
 	case PLAYER_TWO:
 		//当り判定
-		if (GetPlayerPos(PLAYER_TWO).y <= m_pos[PLAYER_TWO].y + DOOR_HEIGHT) {
+		if (GetPlayerPos(PLAYER_TWO).y <= m_pos[PLAYER_TWO].y + DOOR_HEIGHT &&
+			GetPlayerPos(PLAYER_TWO).y >= m_pos[PLAYER_TWO].y - DOOR_HEIGHT) {
 			if (GetPlayerPos(PLAYER_TWO).x <= m_pos[PLAYER_TWO].x + DOOR_WIDTH &&
 				GetPlayerPos(PLAYER_TWO).x >= m_pos[PLAYER_TWO].x - DOOR_WIDTH) {
 				//Onになった処理

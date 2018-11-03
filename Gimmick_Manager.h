@@ -7,7 +7,7 @@
 
 #ifndef GIMMICKMANAGER_H_
 #define GIMMICKMANAGER_H_
-
+#include "Gimmick.h"
 /**************************************************
 プロトタイプ宣言
 **************************************************/
@@ -35,7 +35,8 @@ void Gimmick_ManagerDraw(void);
 //*****************************************************************************
 // 当たり判定処理
 //*****************************************************************************
-bool Ladder_CollisionCheck(D3DXVECTOR2 playerPos);
+bool Ladder_CollisionCheck(D3DXVECTOR2 playerPos, Gimmick *obstacle);
+bool Pillar_CollisionCheck(D3DXVECTOR2 playerPos, Gimmick *obstacle);
 
 
 #endif // GIMMICKMANAGER_H_

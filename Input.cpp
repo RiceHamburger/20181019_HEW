@@ -15,6 +15,7 @@
 #include "CPlayer.h"
 #include "PlayerManager.h"
 #include "Gimmick_Manager.h"
+#include "DoorManager.h"
 
 //=====================================================================//
 //                                                                     //
@@ -307,14 +308,14 @@ void KeyboardUpdate(void)
 	-------------------------------- */
 	if (KeyboardIsPress(DIK_Z) || KeyboardIsPress(DIK_J))
 	{
-
+		Door_Switch(PLAYER_TWO);
 	}
 	/* --------------------------------
 	ïêäÌÇQ
 	-------------------------------- */
 	if (KeyboardIsRelease(DIK_X) || KeyboardIsRelease(DIK_K))
 	{
-
+		Door_Switch(PLAYER_ONE);
 	}
 	/* --------------------------------
 	ïêäÌSP

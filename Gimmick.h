@@ -20,8 +20,16 @@ class Gimmick : public CPillar {
 private:
 	
 public:
+	enum
+	{
+		TYPE_LADDER,	// ‚Í‚µ‚²
+		TYPE_PILLAR,	// ’Œ
+	};
+
 	Gimmick(k_Texture index, Float2 Pos, Float2 hl);
 	~Gimmick();
+
+	int Type;
 
 	RectC2D GetPosition(void);
 };

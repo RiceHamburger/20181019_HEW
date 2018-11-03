@@ -1,8 +1,8 @@
 /*====================================================================================
 
-門クラス　 [CDoor.h]
+門クラス　 [DoorManager.cpp]
 Autor	: ユ・ビョンチャン
-Date	: 2018/10/26
+Date	: 2018/11/2
 --------------------------------------------------------------------------------------
 コメント:
 門クラス : 背景
@@ -12,54 +12,56 @@ Date	: 2018/10/26
 ====================================================================================*/
 
 
-#ifndef CDOOR_H
-#define CDOOR_H
 /*--------------------------------------------------------------------------------------
 インクルードファイル
 --------------------------------------------------------------------------------------*/
-#include <Windows.h>
-#include <time.h>
-
-#include "CObject.h"
-#include "sprite3D.h"
+#include "DoorManager.h"
+#include "CDoor.h"
 /*--------------------------------------------------------------------------------------
 列挙型 : 構造体
 --------------------------------------------------------------------------------------*/
 
 /*--------------------------------------------------------------------------------------
-マクロ定義
+グローバル関数
 --------------------------------------------------------------------------------------*/
+static CDoor *pDoor = NULL;
 
 /*--------------------------------------------------------------------------------------
-クラス宣言
+関数
 --------------------------------------------------------------------------------------*/
 
-class CDoor : public Sprite3D
+void Door_Init(k_Texture index, D3DXVECTOR2 player_one, D3DXVECTOR2 player_two)
 {
-public:
+	pDoor = new CDoor(index, player_one, player_two);
+}
 
-	CDoor(k_Texture index, D3DXVECTOR2 pos0, D3DXVECTOR2 pos1);		//テクスチャ、上ドアー位置、下ドアー位置
-	CDoor(k_Texture index);
-	~CDoor();
+void Door_Init(k_Texture index)
+{
+	pDoor = new CDoor(k_kobeni);
+}
 
-	void Switch(int index);											//ドアーが押されたか判断(中で当り判定やってる)
+void Door_Uninit(void)
+{
+	delete pDoor;
+	pDoor = NULL;
+}
 
-	void ColorUpdate(void);											//ドアーが押された時の時間で色変えの時間を決めてる
+void Door_Update(void)
+{
+	pDoor->ColorUpdate();
+}
 
-	void Draw();
+void Door_Draw(void)
+{
+	pDoor->Draw();
+}
 
-	bool Fin(void);													//両方押されたらtrueになる
+void Door_Switch(int index)
+{
+	pDoor->Switch(index);
+}
 
-private:
-	k_Texture m_TextureIndex;										//テクスチャ
-	D3DXVECTOR2 m_pos[2];											//ドアー位置
-	D3DCOLOR m_color[2];											//色変えの時の色
-	bool m_OnOff[2];												//ドアーが押されたか
-	bool m_OK;														//両方押されたか
-
-	clock_t start[2], end[2];										//時間で色変えの長さ測定
-
-};
-
-
-#endif //CDOOR_H
+bool Door_Fin(void)
+{
+	return pDoor->Fin();
+}

@@ -21,7 +21,7 @@
 #include "CActivePillar.h"
 #include "COwl.h"
 #include "BlockTwoLoop.h"
-#include "CDoor.h"
+#include "DoorManager.h"
 
 //=====================================================================//
 //                                                                     //
@@ -42,7 +42,6 @@ static CObjectMng *m_pObjectMng;
 static CPillar *pPillar;
 static CActivePillar *pActivePillar;
 static CActiveOwl *pActiveOwl;
-static CDoor *pDoor;
 
 //=====================================================================//
 //                                                                     //
@@ -83,7 +82,7 @@ void GameInit(void)
 	pActivePillar = new CActivePillar(RectC2D(Float2(700.0f, 235.0f), Float2(50.0f, 215.0f)));
 	pActiveOwl = new CActiveOwl(Float2(700.0f, 715.0f), Float2(35.0f, 35.0f), k_kobeni, 60);
 
-	pDoor = new CDoor(k_kobeni, D3DXVECTOR2(3050, 500), D3DXVECTOR2(3050, 0));
+	Door_Init(k_kobeni);
 }
 //=====================================================================//
 //                                                                     //
@@ -100,6 +99,8 @@ void GameUnit(void)
 	CameraManager_Finalize();
 	Gimmick_ManagerUnit();
 	BlockTwoLoopUnit();
+
+	Door_Uninit();
 }
 
 //=====================================================================//
@@ -133,6 +134,7 @@ void GameUpdate(void)
 		UI_Update();
 
 		//pPillar->Update();
+		Door_Update();
 
 		//*****************************************************************TEST*****************************************************************************************
 		SetRange(GetCaneraRange());
@@ -186,7 +188,7 @@ void GameDraw(void)
 
 		BlockTwoLoopDraw();
 
-		pDoor->Draw();
+		Door_Draw();
 
 		//オブジェクトの描画
 		m_pObjectMng->Draw();

@@ -33,7 +33,7 @@
 #define GROUND_Y1					(-15.0f)
 #define GROUND_Y2					(465.0f)
 #define GRAVITY						(-0.98f)
-#define JUMP_VALUE					(18.0f)
+#define JUMP_VALUE					(20.0f)
 #define X_AXIS_MAX					(3840.0f)
 #define SQUATA_HEIGHT				(40.0f)
 //*****************************************************************弄ったところ*****************************************************************************************
@@ -110,6 +110,9 @@ CPlayer::CPlayer(int num) {
 
 	//重力の設定
 	m_vecDir.y = GRAVITY;
+
+	//柱を触ているかの判定
+	m_hashiraue = false;
 
 	//初期化
 	//Sprite::SetPos(D3DXVECTOR2(pos.p.x, pos.p.y), 64, 64);	// （D3DXVECTOR2(XY座標),長さ,高さ）を設定
@@ -240,7 +243,7 @@ bool CPlayer::Update(void) {
 	m_Squats = false;
 
 	//階段判定
-	if (m_Climb) {
+	if (m_Climb || m_hashiraue) {
 		m_velocity.y = m_velocity.y * VELOCITY_RESIST;
 		m_vecDir.y = NULL;
 	}
@@ -344,4 +347,23 @@ void CPlayer::Squats(void) {
 	if (!m_Squats) {
 		m_Squats = true;
 	}
+}
+
+//*****************************************************************************
+// 位置設定X
+//*****************************************************************************
+void CPlayer::SetPosX(float position) {
+	pos.p.x = position;
+}
+//*****************************************************************************
+// 位置設定Y
+//*****************************************************************************
+void CPlayer::SetPosY(float position) {
+	pos.p.y = position;
+}
+//*****************************************************************************
+// 柱を触ているかの判定
+//*****************************************************************************
+void CPlayer::SetHashira(bool sw) {
+	m_hashiraue = sw;
 }

@@ -145,3 +145,45 @@ bool GetPlayerClimb(int index) {
 
 	}
 }
+
+//*****************************************************************************
+// ˆÊ’uÝ’èX
+//*****************************************************************************
+void SetPlayerPosX(int index, float newPosition) {
+	switch (index) {
+	case PLAYER_ONE:
+		g_pPlayer1->SetPosX(newPosition);
+		break;
+
+	case PLAYER_TWO:
+		g_pPlayer2->SetPosX(newPosition);
+		break;
+
+	}
+}
+//*****************************************************************************
+// ˆÊ’uÝ’èY
+//*****************************************************************************
+void SetPlayerPosY(int index, float newPosition) {
+	switch (index) {
+	case PLAYER_ONE:
+		g_pPlayer1->SetPosY(newPosition);
+		break;
+
+	case PLAYER_TWO:
+		g_pPlayer2->SetPosY(newPosition);
+		break;
+
+	}
+}
+//*****************************************************************************
+// ’Œ‚ðG‚Ä‚¢‚é‚©‚Ì”»’è
+//*****************************************************************************
+void SetPlayerOnHashira(int index, bool bIs) {
+	switch (index) {
+	case PLAYER_TWO:
+		return g_pPlayer2->SetHashira(bIs);
+		break;
+
+	}
+}
