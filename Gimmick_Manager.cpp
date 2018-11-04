@@ -73,6 +73,11 @@ void Gimmick_ManagerUpdate(void) {
 	//‰½‚àG‚Ä‚¢‚È‚¢ê‡‚Í’ŒFALSE 
 	SetPlayerOnHashira(PLAYER_TWO, false);
 
+	//‰º
+	if (GetPlayerPos(PLAYER_ONE).x >= p_Block[2]->GetPosition().p.x - p_Block[2]->GetPosition().hl.x + 1.0f && GetPlayerPos(PLAYER_ONE).x <= p_Block[2]->GetPosition().p.x + p_Block[2]->GetPosition().hl.x - 1.0f) {
+	 	SetPlayerSquats(true);
+	}
+
 	//’Œ‚Ì“–‚½‚è”»’è
 	for (int playerIndex = 0;playerIndex < 2;playerIndex++) {
 		for (int j = 1;j < BLOCK_MAX;j++) {
@@ -89,7 +94,7 @@ void Gimmick_ManagerUpdate(void) {
 				float hashiraBottom = p_Block[j]->GetPosition().p.y - p_Block[j]->GetPosition().hl.y;
 
 				//ã
-				if (PlayerTop > hashiraTop && GetPlayerPos(playerIndex).y > p_Block[j]->GetPosition().p.y) {
+				if (PlayerTop > hashiraTop && GetPlayerPos(playerIndex).y > hashiraTop) {
 					SetPlayerPosY(playerIndex, hashiraTop + PLAYER_HEIGHT);
 					SetPlayerOnHashira(playerIndex, true);
 					break;

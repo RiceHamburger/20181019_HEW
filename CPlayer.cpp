@@ -33,7 +33,7 @@
 #define GROUND_Y1					(-15.0f)
 #define GROUND_Y2					(465.0f)
 #define GRAVITY						(-0.98f)
-#define JUMP_VALUE					(20.0f)
+#define JUMP_VALUE					(24.0f)
 #define X_AXIS_MAX					(3840.0f)
 #define SQUATA_HEIGHT				(40.0f)
 //*****************************************************************弄ったところ*****************************************************************************************
@@ -114,6 +114,9 @@ CPlayer::CPlayer(int num) {
 	//柱を触ているかの判定
 	m_hashiraue = false;
 
+	//しゃがみの初期化
+	m_Squats = false;
+
 	//初期化
 	//Sprite::SetPos(D3DXVECTOR2(pos.p.x, pos.p.y), 64, 64);	// （D3DXVECTOR2(XY座標),長さ,高さ）を設定
 	//Sprite::SetDivide(1, 1);									// 画像分割数
@@ -189,6 +192,9 @@ bool CPlayer::Update(void) {
 			pos.hl.y = PLAYER_HEIGHT;
 		}
 
+		//しゃがみの初期化
+		m_Squats = false;
+
 		//*****************************************************************弄ったところ*****************************************************************************************
 
 		break;
@@ -239,8 +245,6 @@ bool CPlayer::Update(void) {
 	//移動ベクトルの初期化
 	m_vecDir.x = NULL;
 	
-	//しゃがみの初期化
-	m_Squats = false;
 
 	//階段判定
 	if (m_Climb || m_hashiraue) {
@@ -347,6 +351,13 @@ void CPlayer::Squats(void) {
 	if (!m_Squats) {
 		m_Squats = true;
 	}
+}
+
+//*****************************************************************************
+// しゃがみ設定
+//*****************************************************************************
+void CPlayer::SetSquats(bool sw) {
+	m_Squats = sw;
 }
 
 //*****************************************************************************
