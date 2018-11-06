@@ -16,6 +16,7 @@
 #include "PlayerManager.h"
 #include "Gimmick_Manager.h"
 #include "DoorManager.h"
+#include "BlockTwoLoop.h"
 
 //=====================================================================//
 //                                                                     //
@@ -331,6 +332,14 @@ void KeyboardUpdate(void)
 	{
 		SetStartKey();
 	}
+
+	/* --------------------------------
+	ƒAƒNƒVƒ‡ƒ“1
+	-------------------------------- */
+	if (KeyboardIsPress(DIK_Z))
+	{
+		BlockTwoSwitch();
+	}
 }
 
 
@@ -489,6 +498,7 @@ void PadUserUpdate(int userNum)
 	{
 		SetStartKey();
 	}
+
 }
 
 

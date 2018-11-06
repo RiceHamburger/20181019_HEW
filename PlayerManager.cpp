@@ -194,3 +194,37 @@ void SetPlayerOnHashira(int index, bool bIs) {
 void SetPlayerSquats(bool sw) {
 	g_pPlayer1->SetSquats(sw);
 }
+
+/* --------------------------------
+停止プレイヤーの移動(左右)
+-------------------------------- */
+void SetPlayerMoveStop(int index)
+{
+	switch (index) {
+	case PLAYER_ONE:
+		g_pPlayer1->SetStopX(false);
+		break;
+
+	case PLAYER_TWO:
+		g_pPlayer2->SetStopX(true);
+		break;
+
+	}
+}
+
+/* --------------------------------
+ゲットプレイヤーの幅高さ
+-------------------------------- */
+S_3DVec GetPlayerHW(int index)
+{
+	switch (index) {
+	case PLAYER_ONE:
+		return g_pPlayer1->GetPos();
+		break;
+
+	case PLAYER_TWO:
+		return g_pPlayer2->GetPos();
+		break;
+
+	}
+}

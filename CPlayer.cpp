@@ -378,3 +378,16 @@ void CPlayer::SetPosY(float position) {
 void CPlayer::SetHashira(bool sw) {
 	m_hashiraue = sw;
 }
+
+//移動ストップ 
+void CPlayer::SetStopX(bool bIsLeft)
+{
+	if (bIsLeft)
+	{
+		m_vecDir.x -= VECDIR_X;
+	}
+	else
+	{
+		m_vecDir.x += VECDIR_X;
+	}
+}

@@ -2,6 +2,7 @@
 #define PLAYERMANAGER_H_
 
 #include <d3dx9.h>
+#include "sprite3D.h"
 
 /**************************************************
 
@@ -85,6 +86,15 @@ void SetPlayerPosY(int index, float newPosition);
 // 柱を触ているかの判定
 //*****************************************************************************
 void SetPlayerOnHashira(int index, bool bIs);
+
+/* --------------------------------
+停止プレイヤーの移動(左右)
+-------------------------------- */
+void SetPlayerMoveStop(int index);
+/* --------------------------------
+ゲットプレイヤーの幅高さ
+-------------------------------- */
+S_3DVec GetPlayerHW(int index);
 
 
 #endif // !PLAYERMANAGER_H_
