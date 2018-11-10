@@ -59,8 +59,8 @@ CDoor::CDoor(k_Texture index)
 {
 	m_TextureIndex = index;
 	
-	m_pos[PLAYER_ONE] = D3DXVECTOR2(3050.0f, 100.0f);
-	m_pos[PLAYER_TWO] = D3DXVECTOR2(3050.0f, 550.0f);
+	m_pos[PLAYER_ONE] = D3DXVECTOR2(3015.0f, 120.0f);
+	m_pos[PLAYER_TWO] = D3DXVECTOR2(3015.0f, 570.0f);
 
 	m_color[PLAYER_ONE] = DOORCOLOR;
 	m_color[PLAYER_TWO] = DOORCOLOR;
@@ -84,12 +84,12 @@ void CDoor::Switch(int index)
 {
 	switch (index)
 	{
-	case PLAYER_ONE:
+	case PLAYER_TWO:
 		//ìñÇËîªíË
-		if (GetPlayerPos(PLAYER_ONE).y <= m_pos[PLAYER_ONE].y + DOOR_HEIGHT &&
-			GetPlayerPos(PLAYER_ONE).y >= m_pos[PLAYER_ONE].y - DOOR_HEIGHT) {
-			if (GetPlayerPos(PLAYER_ONE).x <= m_pos[PLAYER_ONE].x + DOOR_WIDTH &&
-				GetPlayerPos(PLAYER_ONE).x >= m_pos[PLAYER_ONE].x - DOOR_WIDTH) {
+		if (GetPlayerPos(PLAYER_TWO).y <= m_pos[PLAYER_ONE].y + DOOR_HEIGHT &&
+			GetPlayerPos(PLAYER_TWO).y >= m_pos[PLAYER_ONE].y - DOOR_HEIGHT) {
+			if (GetPlayerPos(PLAYER_TWO).x <= m_pos[PLAYER_ONE].x + DOOR_WIDTH &&
+				GetPlayerPos(PLAYER_TWO).x >= m_pos[PLAYER_ONE].x - DOOR_WIDTH) {
 				//OnÇ…Ç»Ç¡ÇΩèàóù
 				m_OnOff[PLAYER_ONE] = true;
 
@@ -106,12 +106,12 @@ void CDoor::Switch(int index)
 
 		break;
 
-	case PLAYER_TWO:
+	case PLAYER_ONE:
 		//ìñÇËîªíË
-		if (GetPlayerPos(PLAYER_TWO).y <= m_pos[PLAYER_TWO].y + DOOR_HEIGHT &&
-			GetPlayerPos(PLAYER_TWO).y >= m_pos[PLAYER_TWO].y - DOOR_HEIGHT) {
-			if (GetPlayerPos(PLAYER_TWO).x <= m_pos[PLAYER_TWO].x + DOOR_WIDTH &&
-				GetPlayerPos(PLAYER_TWO).x >= m_pos[PLAYER_TWO].x - DOOR_WIDTH) {
+		if (GetPlayerPos(PLAYER_ONE).y <= m_pos[PLAYER_TWO].y + DOOR_HEIGHT &&
+			GetPlayerPos(PLAYER_ONE).y >= m_pos[PLAYER_TWO].y - DOOR_HEIGHT) {
+			if (GetPlayerPos(PLAYER_ONE).x <= m_pos[PLAYER_TWO].x + DOOR_WIDTH &&
+				GetPlayerPos(PLAYER_ONE).x >= m_pos[PLAYER_TWO].x - DOOR_WIDTH) {
 				//OnÇ…Ç»Ç¡ÇΩèàóù
 				m_OnOff[PLAYER_TWO] = true;
 

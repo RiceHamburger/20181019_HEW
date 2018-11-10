@@ -22,6 +22,7 @@
 #include "COwl.h"
 #include "BlockTwoLoop.h"
 #include "DoorManager.h"
+#include "Result.h"
 
 //=====================================================================//
 //                                                                     //
@@ -76,6 +77,8 @@ void GameInit(void)
 	CameraManager_Initialize();
 	//UI
 	UI_Init();
+	//Result
+	ResultInit();
 
 	//’Œ‚Ì¶¬
 	pPillar = new CPillar(k_kobeni, Float2(810.0f, 577.5f), Float2(55.0f, 107.5f));
@@ -141,8 +144,8 @@ void GameUpdate(void)
 		//*****************************************************************TEST*****************************************************************************************
 
 		//I“_
-		if (GetPlayerPos(PLAYER_ONE).x > 3600 && GetPlayerPos(PLAYER_TWO).x > 3600) {
-			SetGameStage(k_GAME_START);
+		if (Door_Fin()) {
+			SetGameStage(k_GAME_RESULT);
 		}
 
 		break;
@@ -175,6 +178,7 @@ void GameDraw(void)
 
 		break;
 	case k_GAME_TITLE:
+		
 		TitleDraw();
 		break;
 	case k_GAME_FADEIN:
@@ -207,7 +211,8 @@ void GameDraw(void)
 
 		break;
 	case k_GAME_RESULT:
-
+		ResultUpdate(112);
+		ResultDraw();
 		break;
 	case k_GAME_OVER:
 

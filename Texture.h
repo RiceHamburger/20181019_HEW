@@ -31,6 +31,8 @@ typedef enum k_Texture_tag
 	k_playerLife,
 	k_playerLifeBG,
 	k_ladder,
+	k_timerank,
+	k_rank,
 	E_TEXTURE_MAX,
 }k_Texture;
 

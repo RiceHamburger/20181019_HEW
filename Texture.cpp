@@ -23,6 +23,8 @@ static const textureData textureFiles[] =
 	{ "asset/texture/heart.png",				32,		32 },		// 生命力
 	{ "asset/texture/playerLifeBG.jpg",			70,		900 },		// 生命力の背景
 	{ "asset/texture/ladder.jpg",				77,		431 },		// はしご
+	{ "asset/texture/TimeNum.png",				320,	42 },		// ランキング用ナンバー
+	{ "asset/texture/ranking.png",				1600,	900 },		// ランキング
 }; 
 
 /* --------------------------------
