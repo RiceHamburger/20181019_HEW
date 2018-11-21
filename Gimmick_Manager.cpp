@@ -29,11 +29,11 @@ static Gimmick *p_Block[BLOCK_MAX];
 //*****************************************************************************
 void Gimmick_ManagerInit(void) {
 
-	p_Block[0] = new Gimmick(k_ladder, Float2(1761.0f, 236.0f), Float2(37.5f, 215.0f));
+	p_Block[0] = new Gimmick(k_ladder, Float2(1974.0f, 236.0f), Float2(37.5f, 215.0f));
 	
 	int count = 0;
 	for (int i = 1;i < BLOCK_MAX;i++) {
-		p_Block[i] = new Gimmick(k_title, Float2(2217.0f, 128.0f + 600.0f * count), Float2(55.0f, 107.0f + 65.0f * count));
+		p_Block[i] = new Gimmick(k_title, Float2(2689.0f, 128.0f + 600.0f * count), Float2(55.0f, 107.0f + 65.0f * count));
 		count++;
 	}
 }

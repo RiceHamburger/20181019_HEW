@@ -177,13 +177,9 @@ bool CPlayer::Update(void) {
 		
 
 		//着地判定
-		/*if (pos.p.y <= m_Ground + pos.hl.y && !m_Climb) {
-			m_bJump = false;
+		if (pos.p.y <= m_Ground + pos.hl.y && !m_Climb) {
 			m_velocity.y = 0.0f;
 		}
-		else {
-			m_bJump = true;
-		}*/
 
 		if (m_Squats) {
 			pos.hl.y = SQUATA_HEIGHT;
@@ -377,6 +373,10 @@ void CPlayer::SetPosY(float position) {
 //*****************************************************************************
 void CPlayer::SetHashira(bool sw) {
 	m_hashiraue = sw;
+	//触ているなら下向きの力を0にする
+	if (sw) {
+		m_velocity.y = 0.0f;
+	}
 }
 
 //移動ストップ 
