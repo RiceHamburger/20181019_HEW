@@ -63,5 +63,11 @@ void Door_Switch(int index)
 
 bool Door_Fin(void)
 {
-	return pDoor->Fin();
+	if (pDoor->Fin())
+	{
+		delete pDoor;
+		pDoor = NULL;
+		return true;
+	}
+	return false;
 }

@@ -48,8 +48,12 @@ float g_BridgeXMove = ROTATE_ZERO;	//　橋移動量
 -------------------------------- */
 void BlockTwoObjInit(void)
 {
-	g_pPaint = new CBlockTwoObj(E_PAINT);
-	g_pBridge = new CBlockTwoObj(E_BRIDGE);
+	if (g_pPaint == NULL)
+	{
+		g_pPaint = new CBlockTwoObj(E_PAINT);
+		g_pBridge = new CBlockTwoObj(E_BRIDGE);
+	}
+
 }			  
 /* --------------------------------
 ブロック２オブジェの終了処理
@@ -58,6 +62,9 @@ void BlockTwoObjUnit(void)
 {
 	PTR_DELETE(g_pPaint);
 	PTR_DELETE(g_pBridge);
+	g_rotate = ROTATE_INIT;
+	g_BridgeYMove = ROTATE_ZERO;
+	g_BridgeXMove = ROTATE_ZERO;
 }
 /* --------------------------------
 ブロック２オブジェの描画処理

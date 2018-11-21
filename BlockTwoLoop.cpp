@@ -61,6 +61,7 @@ void BlockTwoLoopInit(void)
 void BlockTwoLoopUnit(void)
 {
 	BlockTwoObjUnit();
+	g_bIsSwitchOn = false;
 }
 /* --------------------------------
 ƒuƒƒbƒN‚Q‚Ì•`‰æˆ—

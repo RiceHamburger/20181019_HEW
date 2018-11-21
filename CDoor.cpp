@@ -76,7 +76,19 @@ CDoor::CDoor(k_Texture index)
 
 CDoor::~CDoor()
 {
+	m_pos[PLAYER_ONE] = D3DXVECTOR2(3015.0f, 120.0f);
+	m_pos[PLAYER_TWO] = D3DXVECTOR2(3015.0f, 570.0f);
 
+	m_color[PLAYER_ONE] = DOORCOLOR;
+	m_color[PLAYER_TWO] = DOORCOLOR;
+
+	m_OnOff[PLAYER_ONE] = false;
+	m_OnOff[PLAYER_TWO] = false;
+	m_OK = false;
+
+	Sprite3D::SetColor(DOORCOLOR_WHITE);
+	Sprite3D::SetDivide(1, 1);
+	Sprite3D::SetUVNum(0, 0);
 }
 
 //ÉhÉAÅ[Ç™âüÇ≥ÇÍÇΩÇ©îªíf(íÜÇ≈ìñÇËîªíËÇ‚Ç¡ÇƒÇÈ)

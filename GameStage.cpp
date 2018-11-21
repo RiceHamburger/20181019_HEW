@@ -58,34 +58,32 @@ static void SetGameStage(k_GAME_STAGE gameStage);
 //=====================================================================//
 void GameInit(void)
 {
-
-	g_kGameStage = k_GAME_INIT;
-
 	//オブジェクト管理クラスのインスタンス生成
 	m_pObjectMng = new CObjectMng;
 
 	//オブジェクト登録クラスにポインターセット
 	CObjectRegister::SetObjectMng(m_pObjectMng);
+	// タイトルの点滅ボタン！！
+	TitleInit();
+	UI_Init();
+	ResultInit();
+	BackgroundInit();
+
 
 	PlayerInit();
-	Gimmick_ManagerInit();
-	TitleInit();
-
-	BlockTwoLoopInit();
-	//TutorialInit();
-	BackgroundInit();
-	CameraManager_Initialize();
-	//UI
-	UI_Init();
-	//Result
-	ResultInit();
-
 	//柱の生成
 	pPillar = new CPillar(k_kobeni, Float2(810.0f, 577.5f), Float2(55.0f, 107.5f));
 	pActivePillar = new CActivePillar(RectC2D(Float2(700.0f, 235.0f), Float2(50.0f, 215.0f)));
 	pActiveOwl = new CActiveOwl(Float2(700.0f, 715.0f), Float2(35.0f, 35.0f), k_kobeni, 60);
 
+
+	//　上手く行けてるもの
+	g_kGameStage = k_GAME_INIT;
+	Gimmick_ManagerInit();
+	CameraManager_Initialize();
+	BlockTwoLoopInit();
 	Door_Init(k_kobeni);
+	SetGameStage(k_GAME_TITLE);
 }
 //=====================================================================//
 //                                                                     //
@@ -94,7 +92,6 @@ void GameInit(void)
 //=====================================================================//
 void GameUnit(void)
 {
-	//TutorialUnit();
 	BackgroundUnit();
 	TitleUnit();
 	PlayerUnit();
@@ -102,7 +99,6 @@ void GameUnit(void)
 	CameraManager_Finalize();
 	Gimmick_ManagerUnit();
 	BlockTwoLoopUnit();
-
 	Door_Uninit();
 }
 
@@ -116,7 +112,10 @@ void GameUpdate(void)
 	switch (g_kGameStage)
 	{
 	case k_GAME_INIT:
+		// 再開の時の初期化入れる所
 		SetGameStage(k_GAME_TITLE);
+		BlockTwoLoopInit();
+		Door_Init(k_kobeni);
 		break;
 	case k_GAME_TITLE:
 		break;
@@ -124,11 +123,8 @@ void GameUpdate(void)
 
 		break;
 	case k_GAME_TUTORIAL:
-		//TutorialUpdate();
-		//PlayerUpdate();
 		CameraManager_Update(GetPlayerPos(PLAYER_ONE), GetPlayerPos(PLAYER_TWO));
-		Gimmick_ManagerUpdate();
-		BlockTwoLoopUpdate();
+
 
 		//オブジェクトの更新
 		m_pObjectMng->Update();
@@ -136,14 +132,19 @@ void GameUpdate(void)
 		//UI Maneger
 		UI_Update();
 
-		//pPillar->Update();
+
+		//ブロック２の更新処理
+		BlockTwoLoopUpdate();
+		//ブロック３の更新処理
+		Gimmick_ManagerUpdate();
+		//ブロック４の更新処理
 		Door_Update();
 
 		//*****************************************************************TEST*****************************************************************************************
 		SetRange(GetCaneraRange());
 		//*****************************************************************TEST*****************************************************************************************
 
-		//終点
+		//終点 ドアー　両方オーペンした場合
 		if (Door_Fin()) {
 			SetGameStage(k_GAME_RESULT);
 		}
@@ -156,10 +157,12 @@ void GameUpdate(void)
 
 		break;
 	case k_GAME_RESULT:
-
+		ResultUpdate(112);
 		break;
 	case k_GAME_OVER:
-
+		// ゲーム終了の時のリリース処理
+		BlockTwoLoopUnit();
+		SetGameStage(k_GAME_INIT);
 		break;
 	default:
 		break;
@@ -185,24 +188,28 @@ void GameDraw(void)
 
 		break;
 	case k_GAME_TUTORIAL:
-		CameraManager_Draw();
-		//TutorialDraw();
-		BackgroundDraw();
-		Gimmick_ManagerDraw();
 
-		BlockTwoLoopDraw();
 
-		Door_Draw();
+		//PlayerDraw();
+
+		//pPillar->Draw();
+
 
 		//オブジェクトの描画
 		m_pObjectMng->Draw();
-
 		//UI描画
 		UI_Draw();
 
-		//PlayerDraw();
-		
-		//pPillar->Draw();
+		// カメラ処理
+		CameraManager_Draw();
+		// 背景処理
+		BackgroundDraw();
+		// ブロック２描画
+		BlockTwoLoopDraw();
+		// ブロック３描画
+		Gimmick_ManagerDraw();
+		// ブロック４描画
+		Door_Draw();
 		break;
 	case k_GAME_START:
 		PlayerDraw();
@@ -211,7 +218,7 @@ void GameDraw(void)
 
 		break;
 	case k_GAME_RESULT:
-		ResultUpdate(112);
+		// リザルト描画
 		ResultDraw();
 		break;
 	case k_GAME_OVER:
@@ -251,8 +258,6 @@ void SetStartKey(void)
 
 			break;
 		case k_GAME_TUTORIAL:
-			//if(TutorialClear())
-			//SetGameStage(k_GAME_START);
 			break;
 		case k_GAME_START:
 
@@ -261,13 +266,13 @@ void SetStartKey(void)
 
 			break;
 		case k_GAME_RESULT:
-
+			SetGameStage(k_GAME_OVER);
 			break;
 		case k_GAME_OVER:
 
 			break;
 		}
-		keyCnt = 20;
+		keyCnt = 3;
 	}
 	keyCnt = --keyCnt < CNT_ZERO ? CNT_ZERO : keyCnt;
 }
